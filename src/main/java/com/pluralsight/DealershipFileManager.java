@@ -1,15 +1,14 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 
 public class DealershipFileManager {
-
+String fileName = "dealership.csv";
     public Dealership getDealership() {
         String line;
         Dealership dealership = null;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("dealership.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String firstLine = reader.readLine();
             String dealershipData[] = firstLine.split("\\|");
             dealership = new Dealership(dealershipData[0], dealershipData[1], dealershipData[2]);
@@ -34,5 +33,20 @@ public class DealershipFileManager {
         }
         return dealership;
     }
+public void saveDealership(Dealership dealership) {
+    try {
+        FileWriter fw = new FileWriter(fileName);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getPhone() + "\n");
+        for (Vehicle vehicle : dealership.getAllVehicles() ) {
+            bw.write(vehicle.getVin() + "|" + vehicle.getYear() + "|" + vehicle.getMake()+ "|" + vehicle.getModel()+ "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" + vehicle.getOdometer() + "|" + vehicle.getPrice() + "\n");
+        }
+        bw.close();
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+
+}
+
 
 }
