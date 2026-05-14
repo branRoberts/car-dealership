@@ -1,11 +1,18 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
+    private Dealership dealership;
+    private void init(){
+       DealershipFileManager dealershipFileManager = new DealershipFileManager();
+       dealership = dealershipFileManager.getDealership();
+    }
+
     public void display(){
         Scanner input = new Scanner(System.in);
-
+        init();
         while(true){
             System.out.println("Welcome to the Vehicle Menu");
             System.out.println("1. Find Vehicle within price range");
@@ -21,41 +28,38 @@ public class UserInterface {
 
             String choice = input.nextLine();
             switch(choice){
-                case "1":
-                    processPriceRangeRequest();
-                case "2":
-                    processMakeModelRequest();
-                case "3":
-                    processYearRangeRequest();
-                case "4":
-                    processColorRequest();
-                case "5":
-                    processMileageRangeRequest();
-                case "6":
-                    processVehicleTypeRequest();
-                case "7":
-                    processAllVehiclesRequest();
-                case "8":
-                    processAddVehicleRequest();
-                case "9":
-                    processRemoveVehicleRequest();
-                case "99":
+                case "1" -> processPriceRangeRequest();
+                case "2" -> processMakeModelRequest();
+                case "3" -> processYearRangeRequest();
+                case "4" -> processColorRequest();
+                case "5" -> processMileageRangeRequest();
+                case "6" -> processVehicleTypeRequest();
+                case "7" -> processAllVehiclesRequest();
+                case "8" -> processAddVehicleRequest();
+                case "9" -> processRemoveVehicleRequest();
+                case "99" -> {
                     System.out.println("Goodbye!");
-
-                default:
-                    System.out.println("Invalid choice");
+                    return;
+                }
+                default -> System.out.println("Invalid choice");
             }
 
         }
     }
-    public void processPriceRangeRequest(){
+    public void displayVehicles(ArrayList<Vehicle> vehicles){
+        for(Vehicle vehicle : vehicles){
+            System.out.println(vehicle);
+        }
     }
+    public void processPriceRangeRequest(){}
     public void processMakeModelRequest(){}
     public void processYearRangeRequest(){}
     public void processColorRequest(){}
     public void processMileageRangeRequest(){}
     public void processVehicleTypeRequest(){}
-    public void processAllVehiclesRequest(){}
+    public void processAllVehiclesRequest(){
+        displayVehicles(dealership.getAllVehicles());
+    }
     public void processAddVehicleRequest(){}
     public void processRemoveVehicleRequest(){}
 }
