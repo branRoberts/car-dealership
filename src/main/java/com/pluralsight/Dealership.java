@@ -48,4 +48,53 @@ public class Dealership {
     public void removeVehicle(Vehicle vehicle) {
         inventory.remove(vehicle);
     }
+    public ArrayList<Vehicle> getVehiclesByPrice(double minPrice, double maxPrice) {
+        ArrayList<Vehicle> list = new ArrayList<>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getPrice() >= minPrice && vehicle.getPrice() <= maxPrice) {
+                list.add(vehicle);
+            }
+        }
+        return list;
+    }
+    public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        ArrayList<Vehicle> list = new ArrayList<>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model)) {
+                list.add(vehicle);
+            }
+        }
+    return list;}
+    public ArrayList<Vehicle> getVehiclesByYearRange(int minYear, int maxYear) {
+        ArrayList<Vehicle> list = new ArrayList<>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getYear() >= minYear && vehicle.getYear() <= maxYear) {
+                list.add(vehicle);
+            }
+        }
+    return list;}
+    public ArrayList<Vehicle> getVehiclesByColor(String color) {
+        ArrayList<Vehicle> list = new ArrayList<>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getColor().equalsIgnoreCase(color)) {
+                list.add(vehicle);
+            }
+        }
+        return list;}
+    public ArrayList<Vehicle> getVehiclesByMileageRange(int minMileage, int maxMileage) {
+        ArrayList<Vehicle> list = new ArrayList<>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getOdometer() >= minMileage && vehicle.getOdometer() <= maxMileage) {
+                list.add(vehicle);
+            }
+        }
+    return list;}
+    public ArrayList<Vehicle> getVehiclesByvehicleType(String vehicleType) {
+        ArrayList<Vehicle> list = new ArrayList<>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getVehicleType().equalsIgnoreCase(vehicleType)) {
+                list.add(vehicle);
+            }
+        }
+       return list; }
 }
