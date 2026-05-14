@@ -94,6 +94,42 @@ public class UserInterface {
     public void processAllVehiclesRequest(){
         displayVehicles(dealership.getAllVehicles());
     }
-    public void processAddVehicleRequest(){}
-    public void processRemoveVehicleRequest(){}
+    public void processAddVehicleRequest(){
+        System.out.println("Please enter the Vin Number for this vehicle");
+        int vin = Integer.parseInt(input.nextLine());
+        System.out.println("Please enter the Year Number for this vehicle");
+        int year = Integer.parseInt(input.nextLine());
+        System.out.println("Please enter the Make for this vehicle");
+        String make = input.nextLine();
+        System.out.println("Please enter the Model for this vehicle");
+        String model = input.nextLine();
+        System.out.println("Please enter the Vehicle Type for this vehicle");
+        String vehicleType = input.nextLine();
+        System.out.println("Please enter the Color for this vehicle");
+        String color = input.nextLine();
+        System.out.println("Please enter the Mileage for this vehicle");
+        int mileage = Integer.parseInt(input.nextLine());
+        System.out.println("Please enter the Price for this vehicle");
+        double price = Double.parseDouble(input.nextLine());
+
+        dealership.addVehicle(new Vehicle(vin,year,make,model,vehicleType,color,mileage,price));
+        DealershipFileManager fileManager = new DealershipFileManager();
+        fileManager.saveDealership(dealership);
+    }
+    public void processRemoveVehicleRequest(){
+       Vehicle lineInCsv = null;
+        System.out.println("Please enter the Vin Number for this vehicle");
+        int vin = Integer.parseInt(input.nextLine());
+        for(Vehicle vehicle : dealership.getAllVehicles()){
+            if (vin == vehicle.getVin()){
+                 lineInCsv = vehicle;
+            }
+        }
+        if (lineInCsv != null){
+            dealership.removeVehicle(lineInCsv);
+            DealershipFileManager fileManager = new DealershipFileManager();
+            fileManager.saveDealership(dealership);
+        }else
+            System.out.println("Couldn't find the vehicle");
+    }
 }
